@@ -1,2 +1,8 @@
-var/
 docker/logs/
+
+var/
+vendor/
+
+.DS_STORE
+
+*.log
