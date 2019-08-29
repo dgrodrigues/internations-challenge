@@ -4,6 +4,12 @@ services:
         image: postgres
         ports:
             - '5433:5432'
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_DB: internations
+            POSTGRES_PASSWORD: postgres
+        volumes:
+            - db-data:/var/lib/postgresql/data
     php:
         build: php-fpm
         ports:
@@ -13,11 +19,18 @@ services:
             - ./logs/symfony:/var/www/symfony/var/logs:cached
         links:
             - postgres
+        depends_on:
+            - postgres
     nginx:
         build: nginx
         ports:
             - '8080:80'
         links:
             - php
+        depends_on:
+            - php
         volumes:
+            - ../:/var/www/symfony:cached
             - ./logs/nginx/:/var/log/nginx:cached
+volumes: 
+     db-data:

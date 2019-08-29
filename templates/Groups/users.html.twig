@@ -1,0 +1,59 @@
+<div id="update-users" class="popup" v-cloak>
+    <h2>Update Users</h2>
+    <hr/>
+    <div class="two-panel-selector">
+        <ul>
+            <li @click="toogleOutElement" 
+                v-for="user in users_out" 
+                :class="{ selected : selectedOutElements.includes(user.id) }"
+                :data-id="user.id">
+                <% user.name %>
+            </li>
+        </ul>
+        <div class="select-buttons">
+            <button @click="transferOut">
+                <i class="fas fa-arrow-circle-left"></i>
+            </button>
+            <button @click="transferIn">
+                <i class="fas fa-arrow-circle-right"></i>
+            </button>
+        </div>
+        <ul>
+            <li @click="toogleInElement" 
+                v-for="user in users_in" 
+                :class="{ selected : selectedInElements.includes(user.id) }"
+                :data-id="user.id">
+                <% user.name %>
+            </li>
+        </ul>
+    </div>
+
+    <div id="form">
+        <div>
+            <button @click="submitUsersUpdate">Save Users</button>
+        </div>
+        <div>
+            <button onClick="closePopup(event)">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        var group = {{ group }};
+        var users_out_render = [];
+        {% for user in users %}
+            users_out_render.push({
+                id: "{{ user.id }}",
+                name: '{{ user.firstName }} {{ user.lastName }}'
+            });
+        {% endfor %}
+
+        var users_in_render = [];
+        {% for user in group_users %}
+            users_in_render.push({
+                id: "{{ user.id }}",
+                name: '{{ user.firstName }} {{ user.lastName }}'
+            });
+        {% endfor %}
+    </script>
+
+</div>

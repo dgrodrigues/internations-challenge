@@ -1,0 +1,42 @@
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+groups:
+    path: /groups
+    controller: App\Controller\GroupsController::index
+add-group:
+    path: /groups/add
+    controller: App\Controller\GroupsController::add
+delete-group:
+    path: /groups/delete/{id}
+    controller: App\Controller\APIController::deleteGroup
+update-group:
+    path: /groups/update/{id}
+    controller: App\Controller\GroupsController::update
+update-users:
+    path: /groups/users/{id}
+    controller: App\Controller\GroupsController::users
+list-groups:
+    path: /groups/list
+    controller: App\Controller\APIController::listGroups
+update-users-list:
+    path: /groups/users/update/{id}
+    controller: App\Controller\APIController::updateUsers
+    methods: [POST]
+
+users:
+    path: /users
+    controller: App\Controller\UsersController::index
+add-user:
+    path: /users/add
+    controller: App\Controller\UsersController::add
+delete-user:
+    path: /users/delete/{id}
+    controller: App\Controller\APIController::deleteUser
+update-user:
+    path: /users/update/{id}
+    controller: App\Controller\UsersController::update
+list-users:
+    path: /users/list
+    controller: App\Controller\APIController::listUsers

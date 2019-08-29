@@ -1,0 +1,23 @@
+#home h1 {
+    color: rgb(51, 157, 169);
+    text-transform: uppercase;
+}
+
+#home p {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 25px;
+    max-width: 480px;
+    opacity: 0.5;
+}
+
+@media only screen and (max-width: 768px) {
+    #home h1 {
+        font-size: 20px;
+    }
+
+    #home p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+}

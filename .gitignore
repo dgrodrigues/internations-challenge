@@ -1,7 +1,10 @@
 docker/logs/
 
 var/
-vendor/
+/vendor/
+.var/*
+cache/
+.vscode
 
 .DS_STORE
 

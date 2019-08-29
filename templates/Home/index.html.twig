@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div id="home">
+        <h1>Users Management</h1>
+        <p>Welcome! This web app was made as a challenge for frontend job opportunity at Internations.</p>
+        <p>The frameworks used are Symfony 4 and Vue.js, running using Docker containers.</p>
+        <p>In this web app you can add, remove and edit Groups, create, remove and delete users, as well as assign them to groups.</p>
+    </div>
+    <div class="add-buttons">
+        {{ include('Components/addGroup.html.twig') }}
+        {{ include('Components/addUser.html.twig') }}
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/home.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+        <meta name="og:title" property="og:title" content="">
+        <meta name="og:description" property="og:description" content="">
+
+        {% block stylesheets %}
+            <style>
+                [v-cloak] { display:none; }
+            </style>
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/css/popup.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/js/vendor/magnific-popup/magnific-popup.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/js/vendor/fontawesome/styles/all.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/js/vendor/toastr/toastr.min.css') }}">
+        {% endblock %}
+
+    </head>
+    <body>
+        <div id="sidebar">
+            {% block sidebar %}
+                <ul>
+                    <li class="{% if app.request.attributes.get('_route') == 'home' %}selected{% endif %}">
+                        <a href="/">
+                            <i class="fas fa-home"></i>Home
+                        </a>
+                    </li>
+                    <li class="{% if app.request.attributes.get('_route') == 'groups' %}selected{% endif %}">
+                        <a href="/groups">
+                            <i class="fas fa-layer-group"></i>Groups
+                        </a>
+                    </li>
+                    <li class="{% if app.request.attributes.get('_route') == 'users' %}selected{% endif %}">
+                        <a href="/users">
+                            <i class="fas fa-users"></i>Users
+                        </a>
+                    </li>
+                </ul>
+            {% endblock %}
+        </div>
+
+        <div id="content">
+            {% block body %}{% endblock %}
+        </div>
+        
+
+        {% block javascript %}
+            <script src="{{ asset('assets/js/vendor/jquery/jquery-3.4.1.min.js') }}"></script>
+            <script src="{{ asset('assets/js/vendor/vuejs/vue.min.js') }}"></script>
+            <script src="{{ asset('assets/js/vendor/axios/axios.min.js') }}"></script>
+            <script src="{{ asset('assets/js/vendor/magnific-popup/magnific-popup.min.js') }}"></script>
+            <script src="{{ asset('assets/js/vendor/toastr/toastr.min.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

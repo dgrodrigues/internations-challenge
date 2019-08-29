@@ -1,0 +1,10 @@
+<div id="update-user" class="popup">
+    <h2>Update User</h2>
+    <hr/>
+    {{ form(form, { 
+        'attr': { 
+            'onSubmit':'updateUser(event);',
+            'data-id': id
+        } 
+    }) }}
+</div>

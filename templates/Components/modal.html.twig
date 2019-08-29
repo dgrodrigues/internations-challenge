@@ -1,0 +1,11 @@
+<div v-if="confirmModal" class="modal">
+    <div class="modal-window">
+    <p>{{ question }} <% selectedElementText %>?</p>
+    <div class="actions">
+        <button class="cancel" 
+            @click="{{ cancelButtonAction }}">Cancel</button>
+        <button class="confirm" 
+            @click="{{ confirmButtonAction }}">{{ confirmButtonText }}</button>
+    </div>
+    </div>
+</div>

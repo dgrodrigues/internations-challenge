@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Groups{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/groups.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div id="groups" v-cloak>
+        <h1>Groups</h1>
+        <hr />
+        <div>
+            <table v-if="groups.length" class="table-custom">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th class="number">Users (Nº)</th>
+                        <th class="actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <tr v-for="group in groups">
+                        <td><% group.id %></td>
+                        <td class="name"><% group.name %></td>
+                        <td class="number"><% group.usersCount %></td>
+                        <td class="actions">
+                            <button v-if="group.id !== 0" class="delete" @click="askDelete(group)">
+                                <i class="fas fa-trash"></i><span>Delete</span>
+                            </button>
+                            <a :href="'/groups/users/' + group.id" v-if="group.id !== 0" class="ajax-edit-users">
+                                <i class="fas fa-users"></i><span>Users</span>
+                            </a>
+                            <a :href="'/groups/update/' + group.id" class="ajax-edit-group">
+                                <i class="fas fa-edit"></i><span>Edit</span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div v-if="!groups.length" class="no-results">
+                <h2>No Groups</h2>
+                <p>There are no groups to show at the moment.</p>
+            </div>
+        </div>
+
+        {{ include('Components/modal.html.twig', { 
+            'question': 'Are you sure you want to delete the group',
+            'cancelButtonAction': 'cancelDelete',
+            'confirmButtonAction': 'confirmDelete',
+            'confirmButtonText': 'Delete'
+        }) }}
+
+        <div class="add-buttons">
+            {{ include('Components/addGroup.html.twig') }}
+        </div>
+    </div>
+   
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        var groupsArray = [];
+        {% for group in groups %}
+            groupsArray.push({
+                id: {{ group.id }},
+                name: '{{ group.name }}',
+                usersCount: {{ group.getUsersCount() }}
+            });
+        {% endfor %}
+    </script>
+    <script src="{{ asset('assets/js/groups.js') }}"></script>
+{% endblock %}

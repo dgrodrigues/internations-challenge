@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/users.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div id="users" v-cloak>
+        <h1>Users</h1>
+        <hr />
+
+        <table v-if="users.length > 0" class="table-custom">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>E-mail</th>
+                    <th class="actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody> 
+                <tr v-for="user in users">
+                    <td><% user.id %></td>
+                    <td class="name"><% user.firstName %> <% user.lastName %></td>
+                    <td><% user.email %></td>
+                    <td class="actions">
+                        <button class="delete" @click="askDelete(user)">
+                            <i class="fas fa-trash"></i><span>Delete</span>
+                        </button>
+                        <a :href="'/users/update/' + user.id" class="ajax-edit-user">
+                            <i class="fas fa-edit"></i><span>Edit</span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div v-if="users.length == 0" class="no-results">
+            <h2>No Users</h2>
+            <p>There are no users to show at the moment.</p>
+        </div>
+
+        {{ include('Components/modal.html.twig', { 
+            'question': 'Are you sure you want to delete the user',
+            'cancelButtonAction': 'cancelDelete',
+            'confirmButtonAction': 'confirmDelete',
+            'confirmButtonText': 'Delete'
+        }) }}
+
+        <div class="add-buttons">
+            {{ include('Components/addUser.html.twig') }}
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        var usersArray = [];
+        {% for user in users %}
+            usersArray.push({
+                id: {{ user.id }},
+                firstName: '{{ user.firstName }}',
+                lastName: '{{ user.lastName }}',
+                email: '{{ user.email }}'
+            });
+        {% endfor %}
+    </script>
+    <script src="{{ asset('assets/js/users.js') }}"></script>
+{% endblock %}
