@@ -17,7 +17,3 @@ RUN ln -s /usr/share/zoneinfo/Europe/Lisbon /etc/localtime
 RUN "date"
 
 WORKDIR /var/www/symfony
-
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x  /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh", "php-fpm"]
