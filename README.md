@@ -10,19 +10,19 @@ This was my first contact with Symfony framework. I had previous knowledge of Vu
 ### How to run  
 >To run this project docker must be installed in machine
     
-**1.** In terminal navigate to folder `cd docker`
-**2.** Run `docker-compose build`
+**1.** In terminal navigate to folder `cd docker`\
+**2.** Run `docker-compose build`\
 **3.** Then `docker-compose up -d`
     
 >At first run, composer installs dependencies, so it may take a while to load. To check logs and see if container it's up and running run in the terminal `docker logs -f docker_php_1`. docker_php_1 name can change so if an error of container not found is thrown, check the name of the containers listed in last 3 lines of command number 3. Change command for the one with php in it's name. 
 
 
 ### Only at first run
-**a)** After container starts run `docker-compose run php /usr/bin/composer install` to install compose depedencies;
-**b)** After that, migrate entities to database running `docker-compose run php bin/console doctrine:migrations:migrate`; Agree to schema changes;
+**a)** After container starts run `docker-compose run php /usr/bin/composer install` to install compose depedencies;\
+**b)** After that, migrate entities to database running `docker-compose run php bin/console doctrine:migrations:migrate`; Agree to schema changes;\
 **c)** load fixtures for a initial group `docker-compose run php bin/console doctrine:fixtures:load`; Agree to database purge (currently empty);
 
-##### Open website accessing http://localhost:8080
-\
-**NOTE:** In case a new composer package is needed 'docker-compose run php composer install';
+##### Open website accessing http://localhost:8080  
+
+**NOTE:** In case a new composer package is needed 'docker-compose run php composer install';\
 **NOTE:** In case changes in models are made run `docker-compose run php bin/console make:migration` to generate new migrations, then re-run step **b** from "only at first run" section.
